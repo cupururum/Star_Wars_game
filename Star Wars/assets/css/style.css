@@ -1,0 +1,45 @@
+body {
+  background-image: url(../images/starWarsBackground6.jpg);
+}
+
+.jumbotron {
+  background-color: rgba(158,200,166,0.8);
+}
+
+.jumbotron p {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+}
+
+.yourChosenCharacter, .chooseFighter {
+  background-color: rgb(213,224,215);
+  border-radius: 10px;
+}
+
+.enemiesAvailibleToAttack, .yourChosenEnemy {
+  background-color: rgb(243,117,93);
+  border-radius: 10px;
+}
+
+
+.separateMasters {
+  height: 40px;
+}
+
+
+.fighters {
+  width: 100%;
+}
+
+#fightId {
+  width: 200px;
+  margin-right: 0px;
+}
+
+
+@media (max-width: 640px) {
+    .fighters {
+      width: 100%;
+    }
+}
