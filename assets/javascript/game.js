@@ -5,16 +5,20 @@ var attackPower;
 var counterAttack;
 var healthPointsYourCharacter;
 var healthPointsYourEnemy;
-var healthPointsDecreaseEnemy = 0;
 var attackIncrease = 0;
 var $healthPointsEnemyP;
 var $healthPointsCharacterP;
-youChoseCharacter = false;
-yourCharacter = false;
-yourEnemy = false;
+var $restartButton = $(".restart");
+$restartButton.hide()
+var counter = 0;
+
+$restartButton.on("click", function(){
+  location.reload();
+});
 
 
 function continueGame(healthPointsYourCharacter) {
+
   youChoseCharacter = true;
   $(".fightSectionDefend").empty()
   $(".enemiesAvailibleToAttack").on("click", function(){
@@ -33,6 +37,7 @@ function continueGame(healthPointsYourCharacter) {
           }
 
           if (yourEnemy) {
+            $("#statusUpdateP").text("")
             $(".enemiesAvailibleToAttack").off("click")
           }
 
@@ -40,7 +45,6 @@ function continueGame(healthPointsYourCharacter) {
 
             attackIncrease = attackIncrease + attackPower;
             healthPointsYourEnemy = healthPointsYourEnemy - attackIncrease;
-            //healthPointsDecreaseEnemy = healthPointsDecreaseEnemy - attackIncrease;
             $healthPointsEnemyP.text(healthPointsYourEnemy)
             console.log("HP enemy: ", healthPointsYourEnemy);
             $()
@@ -53,23 +57,28 @@ function continueGame(healthPointsYourCharacter) {
             if (healthPointsYourEnemy <= 0) {
               console.log("You win!")
               $(".attack").off("click");
-              console.log("Choose the next enemy")
-              continueGame(healthPointsYourCharacter);
-
+              console.log("Choose the next enemy2")
+              $("#statusUpdateP").text("Choose the next enemy")
+              counter++;
+              console.log("counter: ", counter)
+              continueGame(healthPointsYourCharacter)
             } else if (healthPointsYourCharacter <= 0) {
               console.log("You lost!")
+              $("#statusUpdateP").text("You've lost")
               $(".attack").off("click");
+              $restartButton.show();
+            }
+
+            if (counter == 2) {
+              $("#statusUpdateP").text("You defieted all enemies!")
+              $restartButton.show()
             }
           });
 
         });
-
-
 }
 
-function startAgainGame() {
 
-}
 
 function game() {
   $(".chooseFighter").on("click", function(){
@@ -114,9 +123,12 @@ function game() {
 
     $(".attack").on("click", function(){
 
+      if (!yourEnemy) {
+        console.log("you need to choose enemy")
+      }
+
       attackIncrease = attackIncrease + attackPower;
       healthPointsYourEnemy = healthPointsYourEnemy - attackIncrease;
-      //healthPointsDecreaseEnemy = healthPointsDecreaseEnemy - attackIncrease;
       $healthPointsEnemyP.text(healthPointsYourEnemy)
       console.log("HP enemy: ", healthPointsYourEnemy);
       $()
@@ -129,14 +141,26 @@ function game() {
       if (healthPointsYourEnemy <= 0) {
         console.log("You win!")
         $(".attack").off("click");
-        console.log("Choose the next enemy")
+        console.log("Choose the next enemy1")
+        $("#statusUpdateP").text("Choose the next enemy")
         continueGame(healthPointsYourCharacter);
 
       } else if (healthPointsYourCharacter <= 0) {
         console.log("You lost!")
+        $("#statusUpdateP").text("You've lost")
         $(".attack").off("click");
+        $restartButton.show();
       }
     });
 }
 
-game();
+function startGame() {
+  yourCharacter = "";
+  yourEnemy = "";
+  youChoseCharacter = false;
+  yourCharacter = false;
+  yourEnemy = false;
+  game()
+}
+
+startGame();
