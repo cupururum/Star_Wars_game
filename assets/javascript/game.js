@@ -16,24 +16,29 @@ $restartButton.on("click", function(){
   location.reload();
 });
 
+function chooseEnemyGame(enemy) {
+  yourEnemy = $(enemy);
+  console.log("your Enemy: ", yourEnemy)
+  $(enemy).detach();
+  $(".fightSectionDefend").append(enemy);
+  $(enemy).removeClass("enemiesAvailibleToAttack").addClass("yourChosenEnemy")
+  counterAttack = $(".yourChosenEnemy").data("counterattack");
+  healthPointsYourEnemy = $(".yourChosenEnemy").data("healthpoints")
+  $healthPointsEnemyP = $(this).find("p.healthPointsP");
+  console.log("$healthPointsEnemyP: ",$healthPointsEnemyP)
+  console.log("counterAttack: ", counterAttack)
+  console.log("healthPointsYourEnemy: ", healthPointsYourEnemy)
+
+}
 
 function continueGame(healthPointsYourCharacter) {
+
 
   youChoseCharacter = true;
   $(".fightSectionDefend").empty()
   $(".enemiesAvailibleToAttack").on("click", function(){
         if (youChoseCharacter) {
-            yourEnemy = $(this);
-            console.log("your Enemy: ", yourEnemy)
-            $(this).detach();
-            $(".fightSectionDefend").append(this);
-            $(this).removeClass("enemiesAvailibleToAttack").addClass("yourChosenEnemy")
-            counterAttack = $(".yourChosenEnemy").data("counterattack");
-            healthPointsYourEnemy = $(".yourChosenEnemy").data("healthpoints")
-            $healthPointsEnemyP = $(this).find("p.healthPointsP");
-            console.log("$healthPointsEnemyP: ",$healthPointsEnemyP)
-            console.log("counterAttack: ", counterAttack)
-            console.log("healthPointsYourEnemy: ", healthPointsYourEnemy)
+            chooseEnemyGame(this);
           }
 
           if (yourEnemy) {
@@ -83,19 +88,7 @@ function continueGame(healthPointsYourCharacter) {
 function game() {
   $(".chooseFighter").on("click", function(){
         if (youChoseCharacter) {
-            yourEnemy = $(this);
-            console.log("your Enemy: ", yourEnemy)
-            $(this).detach();
-            $(".fightSectionDefend").append(this);
-            $(this).removeClass("enemiesAvailibleToAttack").addClass("yourChosenEnemy")
-            counterAttack = $(".yourChosenEnemy").data("counterattack");
-            healthPointsYourEnemy = $(".yourChosenEnemy").data("healthpoints")
-            $healthPointsEnemyP = $(this).find("p.healthPointsP");
-            console.log("$healthPointsEnemyP: ",$healthPointsEnemyP)
-            console.log("counterAttack: ", counterAttack)
-            console.log("healthPointsYourEnemy: ", healthPointsYourEnemy)
-
-
+            chooseEnemyGame(this);
         } else {
             yourCharacter = $(this);
             console.log("your Character: ", yourCharacter)
