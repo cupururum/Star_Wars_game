@@ -24,7 +24,7 @@ function chooseEnemyGame(enemy) {
   $(enemy).removeClass("enemiesAvailibleToAttack").addClass("yourChosenEnemy")
   counterAttack = $(".yourChosenEnemy").data("counterattack");
   healthPointsYourEnemy = $(".yourChosenEnemy").data("healthpoints")
-  $healthPointsEnemyP = $(this).find("p.healthPointsP");
+  $healthPointsEnemyP = $(enemy).find("p.healthPointsP");
   console.log("$healthPointsEnemyP: ",$healthPointsEnemyP)
   console.log("counterAttack: ", counterAttack)
   console.log("healthPointsYourEnemy: ", healthPointsYourEnemy)
